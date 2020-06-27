@@ -1,37 +1,35 @@
-import React from "react";
-import { Item, ItemTitle, ItemText } from "../../elements/start";
+import React, { useEffect, useState } from "react";
 import { Content } from "../../elements/common";
+import { EditorState, convertFromRaw } from "draft-js";
+import "../../styles/editor/readOnlyEditor.css";
+
+import Post from "../../components/post";
+
+import fetchy from "../../utils/fetchy";
+import truncate from "../../utils/truncateEditorState";
 
 const Start = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const res = await fetchy.get("/posts");
+      const data = await res.json();
+      setPosts(data);
+    };
+    getPosts();
+  }, []);
+
+  const Posts = () =>
+    posts.map(({ _id, title, content }) => {
+      const state = convertFromRaw(content);
+      const editorState = truncate(EditorState.createWithContent(state), 200);
+      return <Post key={_id} title={title} content={editorState} />;
+    });
+
   return (
     <Content>
-      <Item>
-        <ItemTitle>Hello my name is!</ItemTitle>
-        <ItemText>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
-          dolorem non quod culpa soluta tenetur nesciunt voluptatem quos
-          dignissimos obcaecati perferendis architecto earum deserunt sit
-          quisquam nostrum, corrupti facere harum cum suscipit pariatur vero
-          atque dolorum doloremque? Tenetur fugit tempora minus. Repudiandae
-          debitis beatae quisquam unde sequi minima necessitatibus labore
-          blanditiis quam corporis, enim nemo dolorum. Soluta laborum aspernatur
-          reprehenderit consequatur id distinctio odio deleniti, accusamus sed
-          itaque officia aliquid aperiam illum dolorum qui repellendus sequi
-          excepturi aliquam explicabo quaerat aut et quam hic eum? Harum facere
-          rem eum neque quas cupiditate totam eos, optio itaque quo quasi
-          asperiores voluptatem possimus, eveniet at quae sequi molestiae!
-          Possimus laborum ab dolore. Quis, ex tempore quaerat non asperiores
-          exercitationem voluptas maxime dolore mollitia nihil perspiciatis
-          nostrum magnam iste unde deleniti magni optio inventore blanditiis
-          voluptate reprehenderit eligendi. Ut beatae nam quam suscipit eius
-          aliquid natus voluptate? Distinctio mollitia suscipit laborum commodi
-          quas?
-        </ItemText>
-      </Item>
-      <Item>
-        <ItemTitle>Hello my name is!</ItemTitle>
-        <ItemText>I had a dream!</ItemText>
-      </Item>
+      <Posts />
     </Content>
   );
 };

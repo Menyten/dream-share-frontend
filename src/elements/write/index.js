@@ -41,6 +41,10 @@ export const Button = styled.button`
   box-shadow: 0 0.5rem 0.5rem rgba(12, 16, 31, 0.4);
   margin-top: 1rem;
 
+  &:disabled {
+    opacity: 0.4;
+  }
+
   &:hover {
     cursor: pointer;
   }
