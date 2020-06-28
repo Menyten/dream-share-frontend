@@ -6,6 +6,7 @@ export const Nav = styled.nav`
   flex: 0.25;
   padding: 1rem;
   background: ${({ theme }) => theme.secondary};
+  z-index: 10;
 
   @media (max-width: 650px) {
     position: fixed;
