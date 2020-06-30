@@ -20,7 +20,7 @@ const Article = () => {
       setTitle(data.title);
     };
     getPost();
-  }, []);
+  }, [id]);
 
   const convertToEditorState = (content) =>
     EditorState.createWithContent(convertFromRaw(content));
