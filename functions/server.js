@@ -1,7 +1,10 @@
+require("dotenv").config();
 const serverless = require("serverless-http");
 const express = require("express");
 const router = require("./routes");
+const connectoToDb = require("./db/connectToDb");
 
+connectoToDb();
 const app = express();
 
 app.use(express.json());

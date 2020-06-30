@@ -1,5 +1,5 @@
 const request = async (url, method = "GET", payload = undefined) => {
-  const API_URL = "/api";
+  const API_URL = "/.netlify/functions/server";
 
   const options = {
     method,
