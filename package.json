@@ -8,12 +8,16 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "draft-js": "^0.11.6",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.20",
+    "netlify-lambda": "^1.6.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-draft-wysiwyg": "^1.14.5",
     "react-infinite-scroll-component": "^5.0.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "serverless-http": "^2.5.0",
     "styled-components": "^5.1.1"
   },
   "scripts": {
